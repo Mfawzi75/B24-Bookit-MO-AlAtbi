@@ -16,14 +16,13 @@ public class Hooks {
 		System.out.println("creating database connection");
 		DBUtils.createConnection();
 	}
-	
+
 	@After("@db")
 	public void afterDbHook() {
 		System.out.println("closing database connection");
 		DBUtils.destroyConnection();
-
 	}
-	
+
 	@Before("@ui")
 	public void setUp() {
 		// we put a logic that should apply to every scenario
@@ -31,8 +30,8 @@ public class Hooks {
 		Driver.getDriver();
 
 	}
-	
-	@After
+
+	@After("@ui")
 	public void tearDown(Scenario scenario) {
 		// only takes a screenshot if the scenario fails
 		if (scenario.isFailed()) {
